@@ -1,0 +1,1452 @@
+/* ==========================================================================
+   MSB I&O Operations Support Agent — Enterprise Console Styles
+   Hackathon Demo | Synthetic Data
+   ========================================================================== */
+
+/* --- Design Tokens --- */
+:root {
+    /* Brand */
+    --msb-red: #C8102E;
+    --msb-red-dark: #A00D24;
+    --msb-red-light: #E84356;
+
+    /* Neutrals */
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F7F8FA;
+    --bg-tertiary: #EEF0F4;
+    --bg-hover: #F0F2F5;
+
+    /* Text */
+    --text-primary: #1B2733;
+    --text-secondary: #4A5A6A;
+    --text-muted: #8A98A8;
+    --text-inverse: #FFFFFF;
+
+    /* Borders */
+    --border-color: #DDE2E8;
+    --border-focus: #B8C2CC;
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(27, 39, 51, 0.06);
+    --shadow-md: 0 2px 8px rgba(27, 39, 51, 0.08);
+    --shadow-lg: 0 4px 16px rgba(27, 39, 51, 0.10);
+
+    /* Status */
+    --critical: #D32F2F;
+    --critical-bg: #FDECEC;
+    --warning: #F57C00;
+    --warning-bg: #FFF4E5;
+    --healthy: #2E7D32;
+    --healthy-bg: #E8F5E9;
+    --info: #1565C0;
+    --info-bg: #E3F2FD;
+
+    /* Semantic Aliases — restrained enterprise palette */
+    --amber: #F57C00;
+    --amber-bg: #FFF4E5;
+    --success: #2E7D32;
+    --success-bg: #E8F5E9;
+    --slate: #4A5A6A;
+    --navy: #1B2733;
+
+    /* Restrained status borders */
+    --critical-border: #E8B0B0;
+    --warning-border: #E8C8A0;
+    --healthy-border: #B8D8B8;
+    --info-border: #B8CCE8;
+
+    /* Layout */
+    --header-height: 64px;
+    --max-width: 1200px;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+
+    /* Typography */
+    --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, sans-serif;
+    --font-mono: "SF Mono", "Cascadia Code", Consolas, "Courier New", monospace;
+    --font-size-xs: 11px;
+    --font-size-sm: 13px;
+    --font-size-base: 14px;
+    --font-size-md: 15px;
+    --font-size-lg: 17px;
+    --font-size-xl: 20px;
+    --font-size-2xl: 24px;
+}
+
+/* --- Reset --- */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: var(--font-size-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+    background-color: var(--bg-secondary);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   1. Header
+   ========================================================================== */
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--header-height);
+    padding: 0 24px;
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.header-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.brand-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: var(--msb-red);
+    color: var(--text-inverse);
+    font-weight: 700;
+    font-size: var(--font-size-md);
+    border-radius: var(--radius-md);
+    letter-spacing: 0.5px;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.2;
+}
+
+.brand-title {
+    font-size: var(--font-size-lg);
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.2px;
+}
+
+.brand-subtitle {
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+    font-weight: 400;
+    margin-top: 2px;
+}
+
+.header-badges {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+}
+
+.badge-demo {
+    background-color: var(--msb-red);
+    color: var(--text-inverse);
+}
+
+.badge-data {
+    background-color: var(--bg-tertiary);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   2. Main Workspace
+   ========================================================================== */
+.chat-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 24px 24px 0;
+    min-height: 0;
+}
+
+.chat-messages {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    padding-bottom: 24px;
+}
+
+/* ==========================================================================
+   3. Welcome Section
+   ========================================================================== */
+.message-welcome {
+    display: flex;
+    gap: 12px;
+    padding: 20px 24px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--msb-red);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.message-avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: 700;
+}
+
+.message-avatar-agent {
+    background-color: var(--msb-red);
+    color: var(--text-inverse);
+}
+
+.message-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.message-sender {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.message-body {
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.message-body p {
+    margin-bottom: 8px;
+}
+
+.message-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   4. Suggested Scenario Cards
+   ========================================================================== */
+.suggested-questions {
+    width: 100%;
+}
+
+.suggested-title {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.suggestion-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.suggestion-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px 20px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.1s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.suggestion-card:hover {
+    border-color: var(--msb-red);
+    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+}
+
+.suggestion-card:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+}
+
+.card-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    font-size: 18px;
+}
+
+.card-icon-app {
+    background-color: var(--info-bg);
+    color: var(--info);
+}
+
+.card-icon-storage {
+    background-color: var(--warning-bg);
+    color: var(--warning);
+}
+
+.card-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.card-title {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.card-description {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    line-height: 1.5;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* ==========================================================================
+   5. Chat / Response Area
+   ========================================================================== */
+.response-area {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+/* --- Message Bubbles --- */
+.message {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.user-message {
+    justify-content: flex-end;
+}
+
+.user-message .message-content {
+    max-width: 75%;
+    padding: 12px 16px;
+    background-color: #243447;
+    color: var(--text-inverse);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.user-message .message-sender {
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.user-message .message-body {
+    color: var(--text-inverse); 
+    background-color: #243447;
+}
+
+.agent-message {
+    justify-content: flex-start;
+}
+
+.agent-message .message-content {
+    max-width: 85%;
+    padding: 16px 20px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--msb-red);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+/* --- Rich Content Typography --- */
+/* --- Section Heading Hierarchy (Item 6) --- */
+.agent-message .message-body h1,
+.agent-message .message-body h2,
+.agent-message .message-body h3,
+.agent-message .message-body h4 {
+    color: var(--navy);
+    font-weight: 600;
+    margin-top: 16px;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+/* Report title (h1) — dark navy with restrained MSB red accent */
+.agent-message .message-body h1 {
+    font-size: var(--font-size-xl);
+    font-weight: 700;
+    color: var(--navy);
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--msb-red);
+}
+
+/* Section heading (h2) — dark navy, strong but not oversized */
+.agent-message .message-body h2 {
+    font-size: var(--font-size-lg);
+    font-weight: 700;
+    color: var(--navy);
+}
+
+/* Subsection heading (h3) — navy, medium weight */
+.agent-message .message-body h3 {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--navy);
+}
+
+/* Subheading (h4) — secondary, muted navy */
+.agent-message .message-body h4 {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.agent-message .message-body h1:first-child,
+.agent-message .message-body h2:first-child,
+.agent-message .message-body h3:first-child,
+.agent-message .message-body h4:first-child {
+    margin-top: 0;
+}
+
+.agent-message .message-body p {
+    margin-bottom: 10px;
+}
+
+.agent-message .message-body ul,
+.agent-message .message-body ol {
+    margin: 8px 0 12px 20px;
+}
+
+.agent-message .message-body li {
+    margin-bottom: 4px;
+}
+
+.agent-message .message-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: var(--font-size-sm);
+}
+
+.agent-message .message-body th,
+.agent-message .message-body td {
+    padding: 8px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.agent-message .message-body th {
+    font-weight: 600;
+    color: var(--text-primary);
+    background-color: var(--bg-tertiary);
+}
+
+.agent-message .message-body td {
+    color: var(--text-secondary);
+}
+
+.agent-message .message-body pre {
+    margin: 12px 0;
+    padding: 12px 16px;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    overflow-x: auto;
+    line-height: 1.5;
+}
+
+.agent-message .message-body code {
+    font-family: var(--font-mono);
+    font-size: var(--font-size-sm);
+    background-color: var(--bg-tertiary);
+    padding: 2px 5px;
+    border-radius: var(--radius-sm);
+}
+
+.agent-message .message-body pre code {
+    background-color: transparent;
+    padding: 0;
+}
+
+.agent-message .message-body blockquote {
+    margin: 10px 0;
+    padding: 8px 14px;
+    border-left: 2px solid var(--border-focus);
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+
+.agent-message .message-body hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 14px 0;
+}
+
+/* ==========================================================================
+   6. Status Styles
+   ========================================================================== */
+.health-critical {
+    color: var(--critical);
+    font-weight: 700;
+}
+
+.health-warning {
+    color: var(--warning);
+    font-weight: 600;
+}
+
+.health-healthy {
+    color: var(--healthy);
+    font-weight: 600;
+}
+
+.health-normal {
+    color: var(--healthy);
+    font-weight: 600;
+}
+
+.badge-critical {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    background-color: var(--critical-bg);
+    color: var(--critical);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.badge-warning {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    background-color: var(--warning-bg);
+    color: var(--warning);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.badge-healthy {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    background-color: var(--healthy-bg);
+    color: var(--healthy);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.badge-info {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    background-color: var(--info-bg);
+    color: var(--info);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* ==========================================================================
+   7. Agent Analysis Presentation
+   ========================================================================== */
+.analysis-section {
+    margin: 14px 0;
+    padding: 16px 20px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+}
+
+.analysis-title {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* --- Overall Summary Card (compact enterprise layout) --- */
+.summary-card {
+    padding: 12px 16px;
+    margin: 10px 0;
+}
+
+.summary-card .analysis-title {
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+}
+
+.summary-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 5px 0;
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+}
+
+.summary-label {
+    flex-shrink: 0;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.summary-value {
+    flex: 1;
+    min-width: 0;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.summary-not-available {
+    color: var(--text-muted);
+    font-style: italic;
+    font-weight: 400;
+}
+
+.summary-badge {
+    display: inline-flex;
+    align-items: center;
+}
+
+/* Health row — immediately visible */
+.summary-card > .summary-row:nth-child(2) {
+    align-items: center;
+    padding: 8px 12px;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-sm);
+    margin-bottom: 4px;
+}
+
+.summary-card > .summary-row:nth-child(2) .summary-label {
+    color: var(--text-secondary);
+}
+
+.summary-card > .summary-row:nth-child(2) .summary-value {
+    font-size: var(--font-size-md);
+    font-weight: 700;
+}
+
+/* System/Service and Time Window — secondary metadata */
+.summary-card > .summary-row:nth-child(3),
+.summary-card > .summary-row:nth-child(4) {
+    font-size: var(--font-size-xs);
+}
+
+.summary-card > .summary-row:nth-child(3) .summary-label,
+.summary-card > .summary-row:nth-child(4) .summary-label {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.summary-card > .summary-row:nth-child(3) .summary-value,
+.summary-card > .summary-row:nth-child(4) .summary-value {
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+/* RCA Hypothesis — widest visual area, prominent but not red */
+.summary-card > .summary-row:nth-child(5) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 10px 14px;
+    background-color: var(--bg-secondary);
+    border-left: 3px solid var(--msb-red);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    margin: 8px 0 4px;
+}
+
+.summary-card > .summary-row:nth-child(5) .summary-label {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.summary-card > .summary-row:nth-child(5) .summary-value {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.5;
+    width: 100%;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+/* Confidence — visible but secondary to RCA */
+.summary-card > .summary-row:nth-child(6) {
+    padding-top: 6px;
+    border-top: 1px solid var(--border-color);
+    margin-top: 4px;
+}
+
+.summary-card > .summary-row:nth-child(6) .summary-label {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.summary-card > .summary-row:nth-child(6) .summary-value {
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+/* Summary divider between summary card and full response */
+.summary-divider {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 14px 0;
+}
+
+/* Rendered response container — prevent page-wide horizontal overflow */
+.agent-response-rendered {
+    min-width: 0;
+    overflow-x: hidden;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+.finding {
+    margin: 10px 0;
+    padding: 10px 14px;
+    background-color: var(--bg-primary);
+    border-left: 3px solid var(--info);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+}
+
+.evidence {
+    margin: 10px 0;
+    padding: 10px 14px;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    line-height: 1.6;
+    overflow-x: auto;
+}
+
+/* RCA Hypothesis — visually prominent */
+.rca-hypothesis {
+    margin: 16px 0;
+    padding: 16px 20px;
+    background-color: var(--critical-bg);
+    border: 1px solid var(--critical);
+    border-left: 4px solid var(--critical);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-md);
+    color: var(--text-primary);
+    font-weight: 500;
+    box-shadow: var(--shadow-sm);
+}
+
+.rca-hypothesis strong,
+.rca-hypothesis b {
+    color: var(--critical);
+}
+
+.recommendation {
+    margin: 10px 0;
+    padding: 12px 16px;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--text-secondary);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+}
+
+.confidence {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin: 8px 0;
+    padding: 6px 12px;
+    background-color: var(--bg-tertiary);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.insufficient-evidence {
+    margin: 12px 0;
+    padding: 12px 16px;
+    background-color: var(--amber-bg);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* --- RCA Hypothesis Panel (Item 7) --- */
+.rca-panel {
+    background-color: var(--critical-bg);
+    border: 1px solid var(--critical-border);
+    border-left: 4px solid var(--msb-red);
+    font-size: var(--font-size-md);
+    font-weight: 700;
+    color: var(--navy);
+}
+
+/* --- Recommendation Panel (Item 8) --- */
+.recommendation-panel {
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-left: 3px solid var(--text-secondary);
+    font-size: var(--font-size-md);
+    font-weight: 700;
+    color: var(--navy);
+}
+
+/* Numbered recommendations following recommendation panel */
+.recommendation-panel ~ ol {
+    margin: 10px 0 12px 22px;
+    padding-left: 0;
+    list-style: decimal;
+}
+
+.recommendation-panel ~ ol li {
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+/* --- Insufficient Evidence Panel (Item 9) --- */
+.insufficient-evidence-panel {
+    background-color: var(--amber-bg);
+    border: 1px solid var(--warning-border);
+    border-left: 3px solid var(--amber);
+    font-size: var(--font-size-md);
+    font-weight: 700;
+    color: var(--navy);
+}
+
+/* --- Status Badges (Item 10) --- */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.status-critical,
+.status-error {
+    background-color: var(--critical-bg);
+    color: var(--critical);
+    border: 1px solid var(--critical-border);
+}
+
+.status-warning,
+.status-degraded,
+.status-open {
+    background-color: var(--amber-bg);
+    color: var(--amber);
+    border: 1px solid var(--warning-border);
+}
+
+.status-healthy,
+.status-normal,
+.status-closed {
+    background-color: var(--success-bg);
+    color: var(--success);
+    border: 1px solid var(--healthy-border);
+}
+
+/* --- Operational Data Tables (Item 11) --- */
+.table-container {
+    overflow-x: auto;
+    margin: 12px 0;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-primary);
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+}
+
+.table-container table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    font-size: var(--font-size-sm);
+}
+
+.table-container thead th {
+    font-weight: 600;
+    color: var(--text-primary);
+    background-color: var(--bg-tertiary);
+    padding: 7px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+.table-container tbody tr {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.table-container tbody tr:last-child {
+    border-bottom: none;
+}
+
+.table-container tbody tr:hover {
+    background-color: var(--bg-hover);
+}
+
+.table-container tbody td {
+    padding: 6px 12px;
+    color: var(--text-secondary);
+    text-align: left;
+    vertical-align: middle;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Status badges within tables stay compact */
+.table-container .status-badge {
+    font-size: var(--font-size-xs);
+    padding: 2px 6px;
+}
+
+/* --- Evidence Section (Item 12 / 19) — dense 16:9 presentation --- */
+.evidence-section {
+    padding: 10px 14px;
+}
+
+.evidence-section .analysis-title {
+    font-size: var(--font-size-sm);
+    margin-bottom: 6px;
+    padding-bottom: 5px;
+}
+
+.evidence-section h4 {
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+.evidence-section .table-container {
+    margin: 6px 0;
+}
+
+.evidence-section .table-container thead th {
+    padding: 5px 8px;
+    font-size: var(--font-size-xs);
+}
+
+.evidence-section .table-container tbody td {
+    padding: 4px 8px;
+    font-size: var(--font-size-xs);
+    line-height: 1.4;
+}
+
+/* --- Findings Section (Item 13) --- */
+.findings-section {
+    padding: 12px 16px;
+}
+
+.findings-section .analysis-title {
+    font-size: var(--font-size-sm);
+    margin-bottom: 8px;
+}
+
+.findings-section li {
+    margin-bottom: 6px;
+    padding: 6px 10px;
+    background-color: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    color: var(--text-primary);
+    line-height: 1.5;
+}
+
+.findings-section li strong,
+.findings-section li b {
+    color: var(--navy);
+}
+
+/* --- Affected Components Section (Item 13) --- */
+.affected-components-section {
+    padding: 12px 16px;
+}
+
+.affected-components-section .analysis-title {
+    font-size: var(--font-size-sm);
+    margin-bottom: 8px;
+}
+
+.affected-components-section .table-container {
+    margin: 8px 0;
+}
+
+.affected-components-section .table-container thead th {
+    padding: 6px 10px;
+    font-size: var(--font-size-xs);
+}
+
+.affected-components-section .table-container tbody td {
+    padding: 5px 10px;
+    font-size: var(--font-size-xs);
+}
+
+/* Status badges clearly visible in affected components */
+.affected-components-section .status-badge {
+    font-size: var(--font-size-xs);
+    padding: 2px 6px;
+}
+
+/* --- Standard / Baseline Assessment (Item 14) --- */
+.standard-section {
+    padding: 12px 16px;
+}
+
+.standard-section .analysis-title {
+    font-size: var(--font-size-sm);
+    margin-bottom: 8px;
+}
+
+.standard-section .table-container {
+    margin: 8px 0;
+}
+
+.standard-section .table-container thead th {
+    padding: 6px 10px;
+    font-size: var(--font-size-xs);
+}
+
+.standard-section .table-container tbody td {
+    padding: 5px 10px;
+    font-size: var(--font-size-xs);
+    font-variant-numeric: tabular-nums;
+}
+
+/* Assessment column — slightly emphasized for quick comparison */
+.standard-section .table-container tbody td:last-child {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* --- Confidence Section (Item 15) --- */
+.confidence-section {
+    padding: 10px 16px;
+    background-color: var(--bg-secondary);
+}
+
+.confidence-section .analysis-title {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+}
+
+.confidence-section p,
+.confidence-section li {
+    font-size: var(--font-size-sm);
+    color: var(--text-secondary);
+}
+
+/* --- Knowledge References Section (Item 15) --- */
+.knowledge-section {
+    padding: 10px 16px;
+    background-color: var(--bg-secondary);
+    border-style: dashed;
+}
+
+.knowledge-section .analysis-title {
+    font-size: var(--font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    padding-bottom: 4px;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.knowledge-section .table-container {
+    margin: 6px 0;
+    border: none;
+    background-color: transparent;
+}
+
+.knowledge-section .table-container thead th {
+    font-size: var(--font-size-xs);
+    padding: 4px 8px;
+    background-color: transparent;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.knowledge-section .table-container tbody td {
+    padding: 4px 8px;
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+}
+
+.knowledge-section p,
+.knowledge-section li {
+    font-size: var(--font-size-xs);
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   8. Chat Input
+   ========================================================================== */
+.chat-input-area {
+    flex-shrink: 0;
+    width: 100%;
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 0 24px 24px;
+    background-color: var(--bg-secondary);
+    border-top: 1px solid transparent;
+}
+
+.chat-input-container {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    padding: 12px 16px;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.chat-input-container:focus-within {
+    border-color: var(--msb-red);
+    box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.08), var(--shadow-md);
+}
+
+.chat-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+    line-height: 1.5;
+    padding: 8px 4px;
+    background-color: transparent;
+    min-height: 40px;
+    max-height: 160px;
+}
+
+.chat-input::placeholder {
+    color: var(--text-muted);
+}
+
+.chat-send-btn {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 24px;
+    background-color: var(--msb-red);
+    color: var(--text-inverse);
+    border: none;
+    border-radius: var(--radius-md);
+    font-family: var(--font-family);
+    font-size: var(--font-size-base);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.15s ease, opacity 0.15s ease;
+    min-height: 40px;
+}
+
+.chat-send-btn:hover {
+    background-color: var(--msb-red-dark);
+}
+
+.chat-send-btn:focus-visible {
+    outline: 2px solid var(--msb-red);
+    outline-offset: 2px;
+}
+
+.chat-send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--msb-red);
+}
+
+.chat-send-btn:disabled:hover {
+    background-color: var(--msb-red);
+}
+
+/* Loading-compatible state */
+.chat-send-btn.is-loading {
+    opacity: 0.7;
+    cursor: progress;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   9. User and Agent Messages (reusable)
+   ========================================================================== */
+/* (message / user-message / agent-message defined in section 5 above) */
+
+/* ==========================================================================
+   10. Loading
+   ========================================================================== */
+.loading {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 16px;
+    color: var(--text-muted);
+    font-size: var(--font-size-sm);
+}
+
+.loading-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: var(--msb-red);
+    animation: loading-pulse 1.2s infinite ease-in-out;
+}
+
+.loading-dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.loading-dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes loading-pulse {
+    0%, 80%, 100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+    40% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==========================================================================
+   11. Responsive Design
+   ========================================================================== */
+
+/* --- 1366x768 and 1920x1080 optimizations --- */
+@media (min-width: 1366px) {
+    .chat-main {
+        padding: 32px 32px 0;
+    }
+
+    .chat-input-area {
+        padding: 0 32px 24px;
+    }
+}
+
+@media (min-width: 1920px) {
+    :root {
+        --max-width: 1400px;
+        --font-size-base: 15px;
+    }
+}
+
+/* --- Below 900px: responsive stacking --- */
+@media (max-width: 900px) {
+    .app-header {
+        padding: 0 16px;
+        height: auto;
+        min-height: var(--header-height);
+        flex-wrap: wrap;
+        gap: 8px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .header-badges {
+        order: 3;
+        width: 100%;
+        justify-content: flex-start;
+    }
+
+    .chat-main {
+        padding: 16px 16px 0;
+    }
+
+    .chat-input-area {
+        padding: 0 16px 16px;
+    }
+
+    .suggestion-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .user-message .message-content,
+    .agent-message .message-content {
+        max-width: 100%;
+    }
+
+    .brand-title {
+        font-size: var(--font-size-md);
+    }
+
+    .brand-subtitle {
+        font-size: var(--font-size-xs);
+    }
+
+    /* Summary fields stack cleanly */
+    .summary-card {
+        padding: 10px 12px;
+    }
+
+    .summary-card > .summary-row:nth-child(5) {
+        padding: 8px 10px;
+    }
+
+    /* Analysis sections — moderately reduce padding */
+    .analysis-section {
+        padding: 12px 14px;
+    }
+
+    /* Evidence — compact for small screens */
+    .evidence-section {
+        padding: 8px 10px;
+    }
+
+    /* Recommendations remain readable */
+    .recommendation-panel ~ ol li {
+        padding: 6px 10px;
+    }
+
+    /* Tables scroll horizontally, no page-wide overflow */
+    .table-container {
+        max-width: 100%;
+        overflow-x: auto;
+    }
+}
+
+/* --- Below 600px: mobile compact --- */
+@media (max-width: 600px) {
+    .header-brand {
+        gap: 8px;
+    }
+
+    .brand-logo {
+        width: 32px;
+        height: 32px;
+        font-size: var(--font-size-sm);
+    }
+
+    .chat-input-container {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .chat-send-btn {
+        width: 100%;
+    }
+
+    .message-welcome {
+        padding: 14px 16px;
+    }
+
+    .suggestion-card {
+        padding: 12px 14px;
+    }
+
+    /* Summary rows stack on narrow screens */
+    .summary-row {
+        flex-wrap: wrap;
+    }
+
+    .summary-label {
+        white-space: normal;
+    }
+}

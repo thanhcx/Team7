@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MSB I&O Operations Support Agent</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-brand">
+            <div class="brand-logo">MSB</div>
+            <div class="brand-text">
+                <h1 class="brand-title">I&O Operations Support Agent</h1>
+                <p class="brand-subtitle">AI-powered operational analysis</p>
+            </div>
+        </div>
+        <div class="header-badges">
+            <span class="badge badge-demo">Hackathon Demo</span>
+            <span class="badge badge-data">MSB-TEAM7</span>
+        </div>
+    </header>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+        <!-- Chat Messages -->
+        <section class="chat-messages" id="chatMessages">
+            <!-- Welcome Message -->
+            <div class="message message-welcome">
+                <div class="message-avatar message-avatar-agent">
+                    <span class="avatar-icon">AI</span>
+                </div>
+                <div class="message-content">
+                    <div class="message-sender">I&O Operations Support Agent</div>
+                    <div class="message-body">
+                        <p>Welcome! I am your AI-powered I&O Operations Support Agent.</p>
+                        <p>I can analyze system health, investigate incidents, and provide
+                           root-cause analysis based on operational evidence from your
+                           infrastructure.</p>
+                        <p>Select a suggested scenario below or ask your own question to begin.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Suggested Question Cards -->
+            <div class="suggested-questions">
+                <h2 class="suggested-title">Suggested Scenarios</h2>
+                <div class="suggestion-cards">
+                    <!-- Card 1: Application Degradation -->
+                    <button class="suggestion-card" data-question="Internet Banking đang chậm từ khoảng 14:00 ngày 2026-08-25. Kiểm tra giúp tôi nguyên nhân có thể nằm ở đâu?">
+                        <div class="card-icon card-icon-storage">
+                            <span>🔍</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Use Case 1 — Internet Banking Slowdown</h3>
+                            <p class="card-description">Internet Banking đang chậm từ khoảng 14:00 ngày 2026-08-25. Kiểm tra giúp tôi nguyên nhân có thể nằm ở đâu?</p>
+                        </div>
+                    </button>
+
+                    <!-- Card 2: Storage Degradation -->
+                    <button class="suggestion-card" data-question="Internet Banking đang chậm từ khoảng 10:00 ngày 2026-08-26. Kiểm tra giúp tôi nguyên nhân có thể nằm ở đâu?">
+                        <div class="card-icon card-icon-storage">
+                            <span>🔍</span>
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Use Case 2 — Internet Banking Slowdown</h3>
+                            <p class="card-description">Internet Banking đang chậm từ khoảng 10:00 ngày 2026-08-26. Kiểm tra giúp tôi nguyên nhân có thể nằm ở đâu?</p>
+                        </div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Response Area (populated dynamically by app.js) -->
+            <div class="response-area" id="responseArea">
+                <!-- Agent responses will be rendered here -->
+            </div>
+        </section>
+
+        <!-- Chat Input -->
+        <section class="chat-input-area">
+            <div class="chat-input-container">
+                <textarea
+                    class="chat-input"
+                    id="chatInput"
+                    placeholder="Ask about system health, incidents, or performance issues..."
+                    rows="3"
+                ></textarea>
+                <button class="chat-send-btn" id="chatSendBtn" type="button">
+                    <span class="send-text">Send</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>

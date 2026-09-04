@@ -1,0 +1,7 @@
+alert_id,timestamp,system_id,domain,component,severity,alert_code,description,status
+ALT-1001,2026-08-25 14:05,SYS-IB-001,Application,internet-banking,WARNING,APP_DB_POOL_HIGH,DB connection pool utilization > 90%,OPEN
+ALT-1002,2026-08-25 14:10,SYS-IB-001,Application,internet-banking,CRITICAL,APP_RESPONSE_TIME_HIGH,Application response time > 1000 ms,OPEN
+ALT-1003,2026-08-25 14:10,SYS-IB-001,Application,internet-banking,CRITICAL,APP_ERROR_RATE_HIGH,Application error rate > 5%,OPEN
+ALT-2001,2026-08-26 10:00,SYS-IB-001,Storage,POOL-FLASH-01,WARNING,STORAGE_LATENCY_HIGH,Storage latency > 5 ms,OPEN
+ALT-2002,2026-08-26 10:05,SYS-IB-001,Storage,POOL-FLASH-01,CRITICAL,STORAGE_LATENCY_CRITICAL,Storage latency > 20 ms,OPEN
+ALT-2003,2026-08-26 10:10,SYS-IB-001,Application,internet-banking,CRITICAL,APP_RESPONSE_TIME_HIGH,Application response time > 1000 ms,OPEN
