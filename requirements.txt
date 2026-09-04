@@ -1,0 +1,7 @@
+# Runtime dependencies for the I&O Operations Support Agent.
+# (Test-only deps like pytest are intentionally NOT included — they are not
+#  needed inside the deployed container image.)
+fastapi>=0.110,<1.0
+uvicorn[standard]>=0.29,<1.0
+pydantic>=2.6,<3.0
+openai>=1.30,<2.0
